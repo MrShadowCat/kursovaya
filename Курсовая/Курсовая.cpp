@@ -98,10 +98,10 @@ void doSomeMagic(int x, int y)
                 baza >> student.pol;
                 baza >> student.startYear;
 
-                cout << student.SurName << endl;
-                cout << student.Name << endl;
-                cout << student.middleName << endl;
-                cout << student.group << endl << endl;
+                cout << student.SurName << "  ";
+                cout << student.Name << "  ";
+                cout << student.middleName << "  ";
+                cout << student.group << "  " << endl;
             }
         }
     }
