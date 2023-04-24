@@ -1,8 +1,15 @@
 ﻿#include <iostream>
 #include <string>
 #include <fstream>
+#include <list>
 
 using namespace std;
+
+struct ExamsRecords {
+    string name;
+    list <string> markType = { "Fail", "Pass", "5", "4", "3", "2" };
+    bool isEmpty;
+};
 
 struct StudentNode
 {
@@ -14,93 +21,207 @@ struct StudentNode
     string group;
     string recordCardNumber;
     string birthDateString;
-    bool pol; // true - Мальчик // false - девочка 
+    string pol;
     int startYear;
-
-    void print()
-    {
-        cout << endl << "Фамилия\t" << "Имя\t" <<  "Группа";
-        cout << endl << SurName << "\t" << Name << "\t"  << group;
-    }
+    ExamsRecords examsRecordsData[9][10];
 
     void read()
     {
+        system("cls");
         cout << endl << "Введите фамилию" << endl;
         cin >> SurName;
         cout << "Введите имя" << endl;
         cin >> Name;
+        cout << "Введите отчество" << endl;
+        cin >> middleName;
+        cout << "Введите факультет" << endl;
+        cin >> facultet;
+        cout << "Введите департамент" << endl;
+        cin >> department;
         cout << "Введите группу" << endl;
         cin >> group;
+        cout << "Введите номер студенческого билета" << endl;
+        cin >> recordCardNumber;
+        cout << "Введите дату рождения" << endl;
+        cin >> birthDateString;
+        cout << "Введите пол: М или Ж" << endl;
+        cin >> pol;
+        cout << "Введите дату поступления" << endl;
+        cin >> startYear;
     }
 };
 
-
-
-int main()
+void doSomeMagic(int x, int y)
 {
-    setlocale(LC_ALL, "ru");
-
+    system("cls");
     string file1 = "База.bin", file2 = "База_коп.bin";
-
-    menu:
-    cout << endl<< "\tМеню" << endl << "1.Изменить значения" << endl << "2.Вывести значения" << endl << "3.Закрыть программу" << endl;
-    char a=0;
-    cin >> a;
-
-    // Модуль меню
-    switch (a)
-    {
-    case '1':
-        cin.clear();
-        break;
-
-    case '2':
-        cin.clear();
-        goto output;
-        break;
-
-    case '3':
-        cin.clear();
-        return 0;
-        break;
-    default:
-        cout << endl << "Введены неверные данные" << endl;
-        cin.clear();
-        goto menu;
-        break;
-    }
-
-    // Модуль вывода значений
-    output:
-    fstream baza;
-    baza.open(file1, fstream::in | fstream::out | fstream::app);
-    if (!baza.is_open())
+    fstream baza(file1, fstream::binary | fstream::in | fstream::out | fstream::app);
+    if (!(baza.is_open()))
     {
         cout << "Ошибка открытия файла" << endl;
     }
     else
     {
-        short b=0;
-        cout << endl << "1.Ввод" << endl << "2.Вывод" << endl;
-        cin >> b;
-
-        if (b == 1)
+        baza.imbue(locale(".1251"));
+        StudentNode student;
+        if (x == 1)
         {
-            StudentNode student;
             student.read();
-            cin.clear();
+            baza << endl << student.SurName << endl;
+            baza << student.Name << endl;
+            baza << student.middleName << endl;
+            baza << student.facultet << endl;
+            baza << student.department << endl;
+            baza << student.group << endl;
+            baza << student.recordCardNumber << endl;
+            baza << student.birthDateString << endl;
+            baza << student.pol << endl;
+            baza << student.startYear;
         }
-
-        if (b == 2)
+        if (y == 1)                                   //Вывод(дописать)
         {
-            StudentNode student;
-            while (baza.read((char*)&student, sizeof(StudentNode)))
+            /*
+            int size = 10;                            //Размер изменить
+            StudentNode *mass = new StudentNode[size];  
+            delete[] mass;
+            */
+            while (!baza.eof())
             {
-                student.print();
+                baza >> student.SurName;
+                baza >> student.Name;
+                baza >> student.middleName;
+                baza >> student.facultet;
+                baza >> student.department;
+                baza >> student.group;
+                baza >> student.recordCardNumber;
+                baza >> student.birthDateString;
+                baza >> student.pol;
+                baza >> student.startYear;
+
+                cout << student.SurName << endl;
+                cout << student.Name << endl;
+                cout << student.middleName << endl;
+                cout << student.group << endl << endl;
             }
-            cin.clear();
         }
     }
     baza.close();
-    goto menu;
+}
+
+void menuinput()
+{
+    int a = 0;
+    string falsee;
+    while (!(a == 4))
+    {
+        system("cls");
+        a = 0;
+        cout << endl;
+        cout << "1.Ввести данные о студенте" << endl;
+        cout << "2.Изменить данные о студенте" << endl;
+        cout << "3.Удалить данные о студенте" << endl;
+        cout << "4.Назад" << falsee << endl;
+        falsee = "";
+        cin >> a;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        switch (a)
+        {
+        case 1:
+            system("cls");
+            doSomeMagic(a,0);
+            break;
+
+        case 4:
+            system("cls");
+            break;
+
+        default:
+            system("cls");
+            falsee = "\nОшибка, допустимые значения 1, 2, 3, 4";
+            break;
+        }
+    }
+}
+
+void menuoutput()
+{
+    int a = 0;
+    string falsee;
+    while (!(a == 4))
+    {
+        a = 0;
+        cout << endl;
+        cout << "1.Вывести краткие данные о студентах" << endl;
+        cout << "2.Вывести полные данные о студенте" << endl;
+        cout << "3.Вывести вариант 73" << endl;
+        cout << "4.Назад" << falsee << endl;
+        falsee = "";
+        cin >> a;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        switch (a)
+        {
+        case 1:
+            system("cls");
+            doSomeMagic(0,a);
+            break;
+        case 4:
+            system("cls");
+            break;
+        default:
+            system("cls");
+            falsee = "\nОшибка, допустимые значения 1, 2, 3, 4";
+            break;
+        }
+    }
+}
+
+void menuGlav()
+{
+    int a = 0;
+    string falsee;
+    while (!(a==3))
+    {
+        cout << endl << "\tМеню" << endl;
+        cout << "1.Изменить значения" << endl;
+        cout << "2.Вывести значения" << endl;
+        cout << "3.Закрыть программу" << falsee << endl;
+        falsee = "";
+        cin >> a;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        switch (a)
+        {
+
+        case 1:
+            system("cls");
+            menuinput();
+            break;
+
+        case 2:
+            system("cls");
+            menuoutput();
+            break;
+
+        case 3:
+            system("cls");
+            break;
+        default:
+            system("cls");
+            falsee = "\nОшибка, допустимые значения 1, 2, 3";
+            break;
+        }
+    }
+}
+
+
+int main()
+{
+    system("chcp 1251 > nul");              //&БАННЫЙ РОТ ЭТОГО КАЗИНО, БЛ@ТЬ!!!
+
+    menuGlav();
 }
