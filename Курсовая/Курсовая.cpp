@@ -63,7 +63,7 @@ void doSomeMagic(int x, int y)
     else
     {
         baza.imbue(locale(".1251"));
-        StudentNode student;
+        StudentNode student, student1;
         if (x == 1)
         {
             student.read();
@@ -78,13 +78,8 @@ void doSomeMagic(int x, int y)
             baza << student.pol << endl;
             baza << student.startYear;
         }
-        if (y == 1)                                   //Вывод(дописать)
+        if (y == 1)
         {
-            /*
-            int size = 10;                            //Размер изменить
-            StudentNode *mass = new StudentNode[size];  
-            delete[] mass;
-            */
             while (!baza.eof())
             {
                 baza >> student.SurName;
@@ -102,6 +97,45 @@ void doSomeMagic(int x, int y)
                 cout << student.Name << "  ";
                 cout << student.middleName << "  ";
                 cout << student.group << "  " << endl;
+            }
+        }
+        if (y == 2)
+        {
+            /*
+         int size = 10;                            //Размер изменить
+         StudentNode *mass = new StudentNode[size];
+         delete[] mass;
+         */
+            cout << "Введите фамилию и имя сдудента, информацию которого хотите увидеть:" << endl;
+            cin >> student1.SurName;
+            cin >> student1.Name;
+            while (!baza.eof())
+            {
+                baza >> student.SurName;
+                baza >> student.Name;
+                baza >> student.middleName;
+                baza >> student.facultet;
+                baza >> student.department;
+                baza >> student.group;
+                baza >> student.recordCardNumber;
+                baza >> student.birthDateString;
+                baza >> student.pol;
+                baza >> student.startYear;
+
+                if ((student.SurName == student1.SurName)&&(student.Name == student1.Name))
+                {
+                    cout << student.SurName << "  ";
+                    cout << student.Name << "  ";
+                    cout << student.middleName << endl;
+                    cout << student.facultet << endl;
+                    cout << student.department << endl;
+                    cout << student.group << endl;
+                    cout << student.recordCardNumber << endl;
+                    cout << student.birthDateString << endl;
+                    cout << student.pol << endl;
+                    cout << student.startYear << endl;
+                    break;
+                }
             }
         }
     }
@@ -166,7 +200,11 @@ void menuoutput()
         {
         case 1:
             system("cls");
-            doSomeMagic(0,a);
+            doSomeMagic(0, a);
+            break;
+        case 2:
+            system("cls");
+            doSomeMagic(0, a);
             break;
         case 4:
             system("cls");
