@@ -8,7 +8,6 @@ using namespace std;
 struct ExamsRecords {
     string name;
     list <string> markType = { "Fail", "Pass", "5", "4", "3", "2" };
-    bool isEmpty;
 };
 
 struct StudentNode
@@ -22,7 +21,7 @@ struct StudentNode
     string recordCardNumber;
     string birthDateString;
     string pol;
-    int startYear;
+    string startYear;
     ExamsRecords examsRecordsData[9][10];
 
     void read()
@@ -51,6 +50,95 @@ struct StudentNode
     }
 };
 
+void FCKDRM()
+{
+    StudentNode student1, student;
+    string file1 = "База.bin";
+    fstream baza(file1, fstream::binary | fstream::in | fstream::out | fstream::app);
+    cout << "Введите Фамилию и Имя студента, данные которого хотите удалить." << endl;
+    cout << "Если хотите удалить данные всех студентов введите <Все>" << endl;
+    cin >> student1.SurName;
+
+    if ((student1.SurName == "все") || (student1.SurName == "Все") || (student1.SurName == "ВСЕ"))
+    {
+        baza.close();
+        ofstream baza;
+        baza.open(file1, ofstream::out);
+        baza.close();
+    }
+    else
+    {
+        cin >> student1.Name;
+        int ochko = 0;
+        while (!baza.eof())
+        {
+            baza >> student.SurName;
+            baza >> student.Name;
+            baza >> student.middleName;
+            baza >> student.facultet;
+            baza >> student.department;
+            baza >> student.group;
+            baza >> student.recordCardNumber;
+            baza >> student.birthDateString;
+            baza >> student.pol;
+            baza >> student.startYear;
+            ochko = ochko + 1;
+        }
+        StudentNode* mass = new StudentNode[ochko];
+        baza.close();
+        fstream baza(file1, fstream::binary | fstream::in | fstream::out | fstream::app);
+        if (!(baza.is_open()))
+        {
+            cout << "Ошибка открытия файла" << endl;
+        }
+        else
+        {
+            for (int i = 0; i < ochko; i++)
+            {
+                baza >> mass[i].SurName;
+                baza >> mass[i].Name;
+                baza >> mass[i].middleName;
+                baza >> mass[i].facultet;
+                baza >> mass[i].department;
+                baza >> mass[i].group;
+                baza >> mass[i].recordCardNumber;
+                baza >> mass[i].birthDateString;
+                baza >> mass[i].pol;
+                baza >> mass[i].startYear;
+            }
+            baza.close();
+            remove("База.bin");
+            fstream baza(file1, fstream::binary | fstream::in | fstream::out | fstream::app);
+            if (!(baza.is_open()))
+            {
+                cout << "Ошибка открытия файла" << endl;
+            }
+            else
+            {
+                for (int i = 0; i < ochko; i++)
+                {
+                    if (!((mass[i].SurName == student1.SurName)&&(mass[i].Name == student1.Name)))
+                    {
+                        baza << endl << mass[i].SurName << endl;
+                        baza << mass[i].Name << endl;
+                        baza << mass[i].middleName << endl;
+                        baza << mass[i].facultet << endl;
+                        baza << mass[i].department << endl;
+                        baza << mass[i].group << endl;
+                        baza << mass[i].recordCardNumber << endl;
+                        baza << mass[i].birthDateString << endl;
+                        baza << mass[i].pol << endl;
+                        baza << mass[i].startYear;
+                        
+                    }
+                }
+                baza.close();
+            }
+        }
+        delete[] mass;
+    }
+}
+
 void doSomeMagic(int x, int y)
 {
     system("cls");
@@ -77,6 +165,12 @@ void doSomeMagic(int x, int y)
             baza << student.birthDateString << endl;
             baza << student.pol << endl;
             baza << student.startYear;
+            baza.close();
+        }
+        if (x == 3)
+        {
+            baza.close();
+            FCKDRM();
         }
         if (y == 1)
         {
@@ -98,17 +192,14 @@ void doSomeMagic(int x, int y)
                 cout << student.middleName << "  ";
                 cout << student.group << "  " << endl;
             }
+            baza.close();
         }
         if (y == 2)
         {
-            /*
-         int size = 10;                            //Размер изменить
-         StudentNode *mass = new StudentNode[size];
-         delete[] mass;
-         */
             cout << "Введите фамилию и имя сдудента, информацию которого хотите увидеть:" << endl;
             cin >> student1.SurName;
             cin >> student1.Name;
+            cout << endl;
             while (!baza.eof())
             {
                 baza >> student.SurName;
@@ -137,9 +228,9 @@ void doSomeMagic(int x, int y)
                     break;
                 }
             }
+            baza.close();
         }
     }
-    baza.close();
 }
 
 void menuinput()
@@ -166,7 +257,10 @@ void menuinput()
             system("cls");
             doSomeMagic(a,0);
             break;
-
+        case 3:
+            system("cls");
+            doSomeMagic(a, 0);
+            break;
         case 4:
             system("cls");
             break;
