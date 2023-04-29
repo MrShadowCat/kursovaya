@@ -5,9 +5,11 @@
 
 using namespace std;
 
-struct ExamsRecords {
+class ExamsRecords 
+{
+public:
     string name;
-    list <string> markType = { "Fail", "Pass", "5", "4", "3", "2" };
+    string markType;
 };
 
 struct StudentNode
@@ -33,9 +35,9 @@ struct StudentNode
         cin >> Name;
         cout << "Введите отчество" << endl;
         cin >> middleName;
-        cout << "Введите факультет" << endl;
+        cout << "Введите институт" << endl;
         cin >> facultet;
-        cout << "Введите департамент" << endl;
+        cout << "Введите кафедру" << endl;
         cin >> department;
         cout << "Введите группу" << endl;
         cin >> group;
@@ -47,10 +49,59 @@ struct StudentNode
         cin >> pol;
         cout << "Введите дату поступления" << endl;
         cin >> startYear;
+
+        int i = 0;
+        int flagName = 1;
+        for (int j = 0; j < 10; j++)
+        {
+            if (!(flagName == 0))
+            {
+                cout << "Введите название предмета" << endl;
+                cout << "Введите 0 если предметов нет" << endl;
+                cin >> examsRecordsData[i][j].name;
+                if (examsRecordsData[i][j].name == "0")
+                {
+                    flagName = 0;
+                    for (int i = 0; i < 9; i++)
+                    {
+                        examsRecordsData[i][j].markType = "0";
+                    }
+                }
+                else
+                {
+                    int flagMark = 1;
+                    for (int i = 0; i < 9; i++)
+                    {
+                        if (!(flagMark == 0))
+                        {
+                            cout << "Введите результат экзаменов за  " << i + 1 << " семестр" << endl;
+                                cout << "Если оценок нет введите 0" << endl;
+                                cin >> examsRecordsData[i][j].markType;
+                                if (examsRecordsData[i][j].markType == "0")
+                                {
+                                    flagMark = 0;
+                                }
+                        }
+                        else
+                        {
+                            examsRecordsData[i][j].markType = "0";
+                        }
+                    }
+                }
+            }
+            else
+            {
+                examsRecordsData[i][j].name = "0";
+                for (int i = 0; i < 9; i++)
+                {
+                    examsRecordsData[i][j].markType = "0";
+                }
+            }
+        }
     }
 };
 
-void FCKDRM()
+void FCKMagic()
 {
     StudentNode student1, student;
     string file1 = "База.bin";
@@ -62,9 +113,7 @@ void FCKDRM()
     if ((student1.SurName == "все") || (student1.SurName == "Все") || (student1.SurName == "ВСЕ"))
     {
         baza.close();
-        ofstream baza;
-        baza.open(file1, ofstream::out);
-        baza.close();
+        remove("База.bin");
     }
     else
     {
@@ -82,6 +131,15 @@ void FCKDRM()
             baza >> student.birthDateString;
             baza >> student.pol;
             baza >> student.startYear;
+            int i = 0;
+            for (int j = 0; j < 10; j++)
+            {
+                baza >> student.examsRecordsData[i][j].name;
+                for (int i = 0; i < 9; i++)
+                {
+                    baza >> student.examsRecordsData[i][j].markType;
+                }
+            }
             ochko = ochko + 1;
         }
         StudentNode* mass = new StudentNode[ochko];
@@ -93,18 +151,27 @@ void FCKDRM()
         }
         else
         {
-            for (int i = 0; i < ochko; i++)
+            for (int p = 0; p < ochko; p++)
             {
-                baza >> mass[i].SurName;
-                baza >> mass[i].Name;
-                baza >> mass[i].middleName;
-                baza >> mass[i].facultet;
-                baza >> mass[i].department;
-                baza >> mass[i].group;
-                baza >> mass[i].recordCardNumber;
-                baza >> mass[i].birthDateString;
-                baza >> mass[i].pol;
-                baza >> mass[i].startYear;
+                baza >> mass[p].SurName;
+                baza >> mass[p].Name;
+                baza >> mass[p].middleName;
+                baza >> mass[p].facultet;
+                baza >> mass[p].department;
+                baza >> mass[p].group;
+                baza >> mass[p].recordCardNumber;
+                baza >> mass[p].birthDateString;
+                baza >> mass[p].pol;
+                baza >> mass[p].startYear;
+                int i = 0;
+                for (int j = 0; j < 10; j++)
+                {
+                    baza >> mass[p].examsRecordsData[i][j].name;
+                    for (int i = 0; i < 9; i++)
+                    {
+                        baza >> mass[p].examsRecordsData[i][j].markType;
+                    }
+                }
             }
             baza.close();
             remove("База.bin");
@@ -115,20 +182,31 @@ void FCKDRM()
             }
             else
             {
-                for (int i = 0; i < ochko; i++)
+                for (int p = 0; p < ochko; p++)
                 {
-                    if (!((mass[i].SurName == student1.SurName)&&(mass[i].Name == student1.Name)))
+                    if (!((mass[p].SurName == student1.SurName)&&(mass[p].Name == student1.Name)))
                     {
-                        baza << endl << mass[i].SurName << endl;
-                        baza << mass[i].Name << endl;
-                        baza << mass[i].middleName << endl;
-                        baza << mass[i].facultet << endl;
-                        baza << mass[i].department << endl;
-                        baza << mass[i].group << endl;
-                        baza << mass[i].recordCardNumber << endl;
-                        baza << mass[i].birthDateString << endl;
-                        baza << mass[i].pol << endl;
-                        baza << mass[i].startYear;
+                        baza << endl << mass[p].SurName << endl;
+                        baza << mass[p].Name << endl;
+                        baza << mass[p].middleName << endl;
+                        baza << mass[p].facultet << endl;
+                        baza << mass[p].department << endl;
+                        baza << mass[p].group << endl;
+                        baza << mass[p].recordCardNumber << endl;
+                        baza << mass[p].birthDateString << endl;
+                        baza << mass[p].pol << endl;
+                        baza << mass[p].startYear;
+                        int i = 0;
+                        for (int j = 0; j < 10; j++)
+                        {
+                            baza << "\n";
+                            baza << mass[p].examsRecordsData[i][j].name;
+                            for (int i = 0; i < 9; i++)
+                            {
+                                baza << "  ";
+                                baza << mass[p].examsRecordsData[i][j].markType;
+                            }
+                        }
                         
                     }
                 }
@@ -150,7 +228,6 @@ void doSomeMagic(int x, int y)
     }
     else
     {
-        baza.imbue(locale(".1251"));
         StudentNode student, student1;
         if (x == 1)
         {
@@ -165,12 +242,23 @@ void doSomeMagic(int x, int y)
             baza << student.birthDateString << endl;
             baza << student.pol << endl;
             baza << student.startYear;
+            int i = 0;
+            for (int j = 0; j < 10; j++)
+            {
+                baza << "\n";
+                baza << student.examsRecordsData[i][j].name;
+                for (int i = 0; i < 9; i++)
+                {
+                    baza << "  ";
+                    baza << student.examsRecordsData[i][j].markType;
+                }
+            }
             baza.close();
         }
         if (x == 3)
         {
             baza.close();
-            FCKDRM();
+            FCKMagic();
         }
         if (y == 1)
         {
@@ -186,6 +274,15 @@ void doSomeMagic(int x, int y)
                 baza >> student.birthDateString;
                 baza >> student.pol;
                 baza >> student.startYear;
+                int i = 0;
+                for (int j = 0; j < 10; j++)
+                {
+                    baza >> student.examsRecordsData[i][j].name;
+                    for (int i = 0; i < 9; i++)
+                    {
+                        baza >> student.examsRecordsData[i][j].markType;
+                    }
+                }
 
                 cout << student.SurName << "  ";
                 cout << student.Name << "  ";
@@ -212,6 +309,15 @@ void doSomeMagic(int x, int y)
                 baza >> student.birthDateString;
                 baza >> student.pol;
                 baza >> student.startYear;
+                int i = 0;
+                for (int j = 0; j < 10; j++)
+                {
+                    baza >> student.examsRecordsData[i][j].name;
+                    for (int i = 0; i < 9; i++)
+                    {
+                        baza >> student.examsRecordsData[i][j].markType;
+                    }
+                }
 
                 if ((student.SurName == student1.SurName)&&(student.Name == student1.Name))
                 {
@@ -225,7 +331,22 @@ void doSomeMagic(int x, int y)
                     cout << student.birthDateString << endl;
                     cout << student.pol << endl;
                     cout << student.startYear << endl;
-                    break;
+                    int i = 0;
+                    for (int j = 0; j < 10; j++)
+                    {
+                        if (!(student.examsRecordsData[i][j].name == "0"))
+                        {
+                            cout << student.examsRecordsData[i][j].name << endl;
+                            for (int i = 0; i < 9; i++)
+                            {
+                                if (!(student.examsRecordsData[i][j].markType == "0"))
+                                {
+                                    cout << student.examsRecordsData[i][j].markType << "  ";
+                                }
+
+                            }
+                        }
+                    }
                 }
             }
             baza.close();
@@ -353,7 +474,7 @@ void menuGlav()
 
 int main()
 {
-    system("chcp 1251 > nul");              //&БАННЫЙ РОТ ЭТОГО КАЗИНО, БЛ@ТЬ!!!
+    system("chcp 1251 > nul");              
 
     menuGlav();
 }
