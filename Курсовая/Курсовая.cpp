@@ -207,7 +207,6 @@ void FCKMagic()
                                 baza << mass[p].examsRecordsData[i][j].markType;
                             }
                         }
-                        
                     }
                 }
                 baza.close();
