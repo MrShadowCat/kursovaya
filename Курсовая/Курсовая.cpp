@@ -740,7 +740,6 @@ void menuGlav()
     }
 }
 
-
 int main()
 {
     system("chcp 1251 > nul");              
