@@ -5,17 +5,10 @@
 
 using namespace std;
 
-class ExamsRecords 
+struct ExamsRecords 
 {
-public:
     string name;
     string markType;
-};
-
-class List
-{
-public:
-
 };
 
 struct StudentNode
@@ -31,382 +24,583 @@ struct StudentNode
     string pol;
     string startYear;
     ExamsRecords examsRecordsData[9][10];
+};
 
-    void read()                                                        //Добавить проверку на адекватность
+StudentNode read()
+{
+    StudentNode st;
+    system("cls");
+    bool adeckvat = false;
+    while (adeckvat == false)
     {
-        system("cls");
-        bool adeckvat = false;
-        while (adeckvat == false)
+        cout << endl << "Введите фамилию" << endl;
+        cin >> st.SurName;
+        if (st.SurName.length() > 30)
         {
-            cout << endl << "Введите фамилию" << endl;
-            cin >> SurName;
-            if (SurName.length() > 30)
+            cout << "Превышение допустимой длины фамилии. Допустимая длина 30 символов. Вы ввели " << st.SurName.length() << " символов" << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        else
+        {
+            for (int i = 0; i < st.SurName.length(); i++)
             {
-                cout << "Превышение допустимой длины фамилии. Допустимая длина 30 символов. Вы ввели " << SurName.length() << " символов" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else
-            {
-                for (int i = 0; i < SurName.length(); i++)
+                bool gg = true;
+                if (!(((int(st.SurName[i]) + 256 >= 192) && (int(st.SurName[i]) + 256 <= 255)) || (int(st.SurName[i]) + 256 == 168) || (int(st.SurName[i]) + 256 == 184)))
                 {
-                    bool gg = true;
-                    if (!(((int(SurName[i]) + 256 >= 192) && (int(SurName[i]) + 256 <= 255)) || (int(SurName[i]) + 256 == 168) || (int(SurName[i]) + 256 == 184)))
-                    {
-                        gg = false;
-                        cout << "Ошибка. В введённой строке присутствуют символы не из русского алфавита" << endl;
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                        adeckvat = gg;
-                        break;
-                    }
+                    gg = false;
+                    cout << "Ошибка. В введённой строке присутствуют символы не из русского алфавита" << endl;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     adeckvat = gg;
+                    break;
                 }
+                adeckvat = gg;
             }
         }
-        adeckvat = false;
-        while (adeckvat == false)
+    }
+    adeckvat = false;
+    while (adeckvat == false)
+    {
+        cout << "Введите имя" << endl;
+        cin >> st.Name;
+        if (st.Name.length() > 30)
         {
-            cout << "Введите имя" << endl;
-            cin >> Name;
-            if (Name.length() > 30)
+            cout << "Превышение допустимой длины имени. Допустимая длина 30 символов. Вы ввели " << st.Name.length() << " символов" << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        else
+        {
+            for (int i = 0; i < st.Name.length(); i++)
             {
-                cout << "Превышение допустимой длины имени. Допустимая длина 30 символов. Вы ввели " << Name.length() << " символов" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else
-            {
-                for (int i = 0; i < Name.length(); i++)
+                bool gg = true;
+                if (!(((int(st.Name[i]) + 256 >= 192) && (int(st.Name[i]) + 256 <= 255)) || (int(st.Name[i]) + 256 == 168) || (int(st.Name[i]) + 256 == 184)))
                 {
-                    bool gg = true;
-                    if (!(((int(Name[i]) + 256 >= 192) && (int(Name[i]) + 256 <= 255)) || (int(Name[i]) + 256 == 168) || (int(Name[i]) + 256 == 184)))
-                    {
-                        gg = false;
-                        cout << "Ошибка. В введённой строке присутствуют символы не из русского алфавита" << endl;
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                        adeckvat = gg;
-                        break;
-                    }
+                    gg = false;
+                    cout << "Ошибка. В введённой строке присутствуют символы не из русского алфавита" << endl;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     adeckvat = gg;
+                    break;
                 }
+                adeckvat = gg;
             }
         }
-        adeckvat = false;
-        while (adeckvat == false)
+    }
+    adeckvat = false;
+    while (adeckvat == false)
+    {
+        cout << "Введите отчество" << endl;
+        cin >> st.middleName;
+        if (st.middleName.length() > 30)
         {
-            cout << "Введите отчество" << endl;
-            cin >> middleName;
-            if (middleName.length() > 30)
+            cout << "Превышение допустимой длины отчества. Допустимая длина 30 символов. Вы ввели " << st.middleName.length() << " символов" << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        else
+        {
+            for (int i = 0; i < st.middleName.length(); i++)
             {
-                cout << "Превышение допустимой длины отчества. Допустимая длина 30 символов. Вы ввели " << middleName.length() << " символов" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else
-            {
-                for (int i = 0; i < middleName.length(); i++)
+                bool gg = true;
+                if (!(((int(st.middleName[i]) + 256 >= 192) && (int(st.middleName[i]) + 256 <= 255)) || (int(st.middleName[i]) + 256 == 168) || (int(st.middleName[i]) + 256 == 184)))
                 {
-                    bool gg = true;
-                    if (!(((int(middleName[i]) + 256 >= 192) && (int(middleName[i]) + 256 <= 255)) || (int(middleName[i]) + 256 == 168) || (int(middleName[i]) + 256 == 184)))
-                    {
-                        gg = false;
-                        cout << "Ошибка. В введённой строке присутствуют символы не из русского алфавита" << endl;
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                        adeckvat = gg;
-                        break;                        
-                    }
+                    gg = false;
+                    cout << "Ошибка. В введённой строке присутствуют символы не из русского алфавита" << endl;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     adeckvat = gg;
+                    break;
                 }
+                adeckvat = gg;
             }
         }
-        getline(cin, facultet);
-        adeckvat = false;
-        while (adeckvat == false)
+    }
+    getline(cin, st.facultet);
+    adeckvat = false;
+    while (adeckvat == false)
+    {
+        cout << "Введите институт" << endl;
+        getline(cin, st.facultet);
+        if (st.facultet.length() > 30)
         {
-            cout << "Введите институт" << endl;
-            getline(cin,facultet);
-            if (facultet.length() > 30)
+            cout << "Превышение допустимой длины института. Допустимая длина 30 символов. Вы ввели " << st.facultet.length() << " символов" << endl;
+            cin.clear();
+        }
+        else
+        {
+            for (int i = 0; i < st.facultet.length(); i++)
             {
-                cout << "Превышение допустимой длины института. Допустимая длина 30 символов. Вы ввели " << facultet.length() << " символов" << endl;
-                cin.clear();
-            }
-            else
-            {
-                for (int i = 0; i < facultet.length(); i++)
+                bool gg = true;
+                if (!(((int(st.facultet[i]) + 256 >= 192) && (int(st.facultet[i]) + 256 <= 255)) || (int(st.facultet[i]) + 256 == 168) || (int(st.facultet[i]) + 256 == 184) || (int(st.facultet[i]) == 32)))
                 {
-                    bool gg = true;
-                    if (!(((int(facultet[i]) + 256 >= 192) && (int(facultet[i]) + 256 <= 255)) || (int(facultet[i]) + 256 == 168) || (int(facultet[i]) + 256 == 184) || (int(facultet[i]) == 32)))
-                    {
-                        gg = false;
-                        cout << "Ошибка. В введённой строке присутствуют символы не из русского алфавита" << endl;
-                        cin.clear();
-                        adeckvat = gg;
-                        break;
-                    }
+                    gg = false;
+                    cout << "Ошибка. В введённой строке присутствуют символы не из русского алфавита" << endl;
+                    cin.clear();
                     adeckvat = gg;
+                    break;
                 }
+                adeckvat = gg;
             }
         }
-        adeckvat = false;
-        while (adeckvat == false)
+    }
+    adeckvat = false;
+    while (adeckvat == false)
+    {
+        cout << "Введите кафедру" << endl;
+        cin >> st.department;
+        if (st.department.length() > 10)
         {
-            cout << "Введите кафедру" << endl;
-            cin >> department;
-            if (department.length() > 10)
+            cout << "Превышение допустимой длины кафедры. Допустимая длина 10 символов. Вы ввели " << st.department.length() << " символов" << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        else
+        {
+            adeckvat = true;
+        }
+    }
+    adeckvat = false;
+    while (adeckvat == false)
+    {
+        cout << "Введите группу" << endl;
+        cin >> st.group;
+        if (st.group.length() > 10)
+        {
+            cout << "Превышение допустимой длины группы. Допустимая длина 10 символов. Вы ввели " << st.group.length() << " символов" << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        else
+        {
+            adeckvat = true;
+        }
+    }
+    adeckvat = false;
+    while (adeckvat == false)
+    {
+        cout << "Введите номер студенческого билета" << endl;
+        cin >> st.recordCardNumber;
+        if (st.recordCardNumber.length() > 10)
+        {
+            cout << "Превышение допустимой длины номера студенческого билета. Допустимая длина 10 символов. Вы ввели " << st.recordCardNumber.length() << " символов" << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        else
+        {
+            adeckvat = true;
+        }
+    }
+    int dd, mm, gggg;
+    cout << "Введите дату рождения (ДД.ММ.ГГГГ)" << endl;
+    adeckvat = false;
+    while (adeckvat == false)
+    {
+        cout << "ДД: " << endl;
+        cin >> dd;
+        if (!((dd > 0) && (dd < 32)))
+        {
+            cout << "Ошибка. Допустимые значения 1-31" << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        else
+        {
+            adeckvat = true;
+        }
+    }
+    adeckvat = false;
+    while (adeckvat == false)
+    {
+        cout << "ММ: " << endl;
+        cin >> mm;
+        if (!((mm > 0) && (mm < 13)))
+        {
+            cout << "Ошибка. Допустимые значения 1-12" << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        else
+        {
+            adeckvat = true;
+        }
+    }
+    adeckvat = false;
+    while (adeckvat == false)
+    {
+        cout << "ГГГГ: " << endl;
+        cin >> gggg;
+        if (!((gggg > 1989) && (gggg < 2006)))
+        {
+            cout << "Ошибка. Допустимые значения 1990-2005" << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        else
+        {
+            adeckvat = true;
+        }
+    }
+    st.birthDateString = to_string(dd) + "." + to_string(mm) + "." + to_string(gggg);
+    cout << st.birthDateString << endl;
+    adeckvat = false;
+    while (adeckvat == false)
+    {
+        cout << "Введите пол: М или Ж" << endl;
+        cin >> st.pol;
+        if (!((st.pol == "ж") || (st.pol == "Ж") || (st.pol == "м") || (st.pol == "М")))
+        {
+            cout << "Ошибка. Вы ввели " << st.pol << " Допустимые значения М или Ж." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        else
+        {
+            adeckvat = true;
+        }
+    }
+    adeckvat = false;
+    while (adeckvat == false)
+    {
+        cout << "Введите год поступления" << endl;
+        cin >> st.startYear;
+        for (int i = 0; i < st.startYear.length(); i++)
+        {
+            if (int(st.startYear[i]) < 48 || int(st.startYear[i]) > 58)
             {
-                cout << "Превышение допустимой длины кафедры. Допустимая длина 10 символов. Вы ввели " << department.length() << " символов" << endl;
+                cout << "Ошибка в строке присутствуют знаки отличные от цифр" << endl;
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
             }
             else
             {
-                adeckvat = true;
-            }
-        }
-        adeckvat = false;
-        while (adeckvat == false)
-        {
-            cout << "Введите группу" << endl;
-            cin >> group;
-            if (group.length() > 10)
-            {
-                cout << "Превышение допустимой длины группы. Допустимая длина 10 символов. Вы ввели " << group.length() << " символов" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else
-            {
-                adeckvat = true;
-            }
-        }
-        adeckvat = false;
-        while (adeckvat == false)
-        {
-            cout << "Введите номер студенческого билета" << endl;
-            cin >> recordCardNumber;
-            if (recordCardNumber.length() > 10)
-            {
-                cout << "Превышение допустимой длины номера студенческого билета. Допустимая длина 10 символов. Вы ввели " << recordCardNumber.length() << " символов" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else
-            {
-                adeckvat = true;
-            }
-        }
-        string dd, mm, gggg;
-        cout << "Введите дату рождения (ДД.ММ.ГГГГ)" << endl;
-        adeckvat = false;
-        while (adeckvat == false)
-        {
-            cout << "ДД: " << endl;
-            cin >> dd;
-            if (!((dd > "0") && (dd < "32")))
-            {
-                cout << "Ошибка. Допустимые значения 1-31" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else
-            {
-                adeckvat = true;
-            }
-        }
-        adeckvat = false;
-        while (adeckvat == false)
-        {
-            cout << "ММ: " << endl;
-            cin >> mm;
-            if (!((mm > "0") && (mm < "13")))
-            {
-                cout << "Ошибка. Допустимые значения 1-12" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else
-            {
-                adeckvat = true;
-            }
-        }
-        adeckvat = false;
-        while (adeckvat == false)
-        {
-            cout << "ГГГГ: " << endl;
-            cin >> gggg;
-            if (!((gggg > "1989") && (gggg < "2006")))
-            {
-                cout << "Ошибка. Допустимые значения 1990-2005" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else
-            {
-                adeckvat = true;
-            }
-        }
-        birthDateString = dd + "." + mm + "." + gggg;
-        cout << birthDateString << endl;
-        adeckvat = false;
-        while (adeckvat == false)
-        {
-            cout << "Введите пол: М или Ж" << endl;
-            cin >> pol;
-            if (!((pol == "ж") || (pol == "Ж") || (pol == "м") || (pol == "М")))
-            {
-                cout << "Ошибка. Вы ввели " << pol << " Допустимые значения М или Ж." << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else
-            {
-                adeckvat = true;
-            }
-        }
-        adeckvat = false;
-        while (adeckvat == false)
-        {
-            cout << "Введите год поступления" << endl;
-            cin >> startYear;
-            for (int i = 0; i < startYear.length(); i++)
-            {
-                if (int(startYear[i]) < 48 || int(startYear[i]) > 58)
+                if ((st.startYear < "1990") || (st.startYear > "2022"))
                 {
-                    cout << "Ошибка в строке присутствуют знаки отличные от цифр" << endl;
+                    cout << "Ошибка. Выход из допустимого диапазона (1990-2022)" << endl;
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     break;
                 }
                 else
                 {
-                    if ((startYear < "1990") || (startYear > "2022"))
-                    {
-                        cout << "Ошибка. Выход из допустимого диапазона (1990-2022)" << endl;
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                        break;
-                    }
-                    else
-                    {
-                        adeckvat = true;
-                    }
+                    adeckvat = true;
                 }
             }
         }
-        int i = 0;
-        int flagName = 1;
-        for (int j = 0; j < 10; j++)
+    }
+    int i = 0;
+    int flagName = 1;
+    for (int j = 0; j < 10; j++)
+    {
+        if (!(flagName == 0))
         {
-            if (!(flagName == 0))
+            getline(cin, st.examsRecordsData[0][j].name);
+            adeckvat = false;
+            while (adeckvat == false)
             {
-                getline(cin, examsRecordsData[0][j].name);
-                adeckvat = false;
-                while (adeckvat == false)
+                cout << "Введите название предмета" << endl;
+                cout << "Введите 0 если предметов нет" << endl;
+                getline(cin, st.examsRecordsData[i][j].name);
+                if (st.examsRecordsData[i][j].name.length() > 31)
                 {
-                    cout << "Введите название предмета" << endl;
-                    cout << "Введите 0 если предметов нет" << endl;
-                    getline(cin, examsRecordsData[i][j].name);
-                    if (examsRecordsData[i][j].name.length() > 31)
-                    {
-                        cout << "Превышение допустимой длины предмета. Допустимая длина 30 символов. Вы ввели " << examsRecordsData[i][j].name.length() << " символов" << endl;
-                        cin.clear();
-                    }
-                    else
-                    {
-                        for (int i = 0; i < examsRecordsData[i][j].name.length(); i++)
-                        {
-                            bool gg = true;
-                            if (!(((int(examsRecordsData[i][j].name[i]) + 256 >= 192) && (int(examsRecordsData[i][j].name[i]) + 256 <= 255)) || (int(examsRecordsData[i][j].name[i]) + 256 == 168) || (int(examsRecordsData[i][j].name[i]) + 256 == 184) || (examsRecordsData[i][j].name == "0") || (int(examsRecordsData[i][j].name[i]) == 32)))
-                            {
-                                gg = false;
-                                cout << "Ошибка. В введённой строке присутствуют символы не из русского алфавита" << endl;
-                                cin.clear();
-                                adeckvat = gg;
-                                break;
-                            }
-                            adeckvat = gg;
-                        }
-                    }
-                }
-                if (examsRecordsData[i][j].name == "0")
-                {
-                    flagName = 0;
-                    for (int i = 0; i < 9; i++)
-                    {
-                        examsRecordsData[i][j].markType = "0";
-                    }
+                    cout << "Превышение допустимой длины предмета. Допустимая длина 30 символов. Вы ввели " << st.examsRecordsData[i][j].name.length() << " символов" << endl;
+                    cin.clear();
                 }
                 else
                 {
-                    int flagMark = 1;
-                    for (int i = 0; i < 9; i++)
+                    for (int i = 0; i < st.examsRecordsData[i][j].name.length(); i++)
                     {
-                        if (!(flagMark == 0))
+                        bool gg = true;
+                        if (!(((int(st.examsRecordsData[i][j].name[i]) + 256 >= 192) && (int(st.examsRecordsData[i][j].name[i]) + 256 <= 255)) || (int(st.examsRecordsData[i][j].name[i]) + 256 == 168) || (int(st.examsRecordsData[i][j].name[i]) + 256 == 184) || (st.examsRecordsData[i][j].name == "0") || (int(st.examsRecordsData[i][j].name[i]) == 32)))
                         {
-                            adeckvat = false;
-                            while (adeckvat == false)
+                            gg = false;
+                            cout << "Ошибка. В введённой строке присутствуют символы не из русского алфавита" << endl;
+                            cin.clear();
+                            adeckvat = gg;
+                            break;
+                        }
+                        adeckvat = gg;
+                    }
+                }
+            }
+            if (st.examsRecordsData[i][j].name == "0")
+            {
+                flagName = 0;
+                for (int i = 0; i < 9; i++)
+                {
+                    st.examsRecordsData[i][j].markType = "0";
+                }
+            }
+            else
+            {
+                int flagMark = 1;
+                for (int i = 0; i < 9; i++)
+                {
+                    if (!(flagMark == 0))
+                    {
+                        adeckvat = false;
+                        while (adeckvat == false)
+                        {
+                            cout << "Введите результат экзаменов за  " << i + 1 << " семестр" << endl;
+                            cout << "Если оценок нет введите 0" << endl;
+                            cin >> st.examsRecordsData[i][j].markType;
+                            if (st.examsRecordsData[i][j].markType == "0")
                             {
-                                cout << "Введите результат экзаменов за  " << i + 1 << " семестр" << endl;
-                                cout << "Если оценок нет введите 0" << endl;
-                                cin >> examsRecordsData[i][j].markType;
-                                if (examsRecordsData[i][j].markType == "0")
+                                adeckvat = true;
+                            }
+                            else
+                            {
+                                if ((st.examsRecordsData[i][j].markType == "2") || (st.examsRecordsData[i][j].markType == "3") || (st.examsRecordsData[i][j].markType == "4") || (st.examsRecordsData[i][j].markType == "5"))
                                 {
                                     adeckvat = true;
                                 }
                                 else
                                 {
-                                    if ((examsRecordsData[i][j].markType == "2") || (examsRecordsData[i][j].markType == "3") || (examsRecordsData[i][j].markType == "4") || (examsRecordsData[i][j].markType == "5"))
+                                    if ((st.examsRecordsData[i][j].markType == "Зачёт") || (st.examsRecordsData[i][j].markType == "зачёт") || (st.examsRecordsData[i][j].markType == "Зачет") || (st.examsRecordsData[i][j].markType == "зачет"))
                                     {
                                         adeckvat = true;
                                     }
                                     else
                                     {
-                                        if ((examsRecordsData[i][j].markType == "Зачёт") || (examsRecordsData[i][j].markType == "зачёт") || (examsRecordsData[i][j].markType == "Зачет") || (examsRecordsData[i][j].markType == "зачет"))
+                                        if ((st.examsRecordsData[i][j].markType == "Незачёт") || (st.examsRecordsData[i][j].markType == "незачёт") || (st.examsRecordsData[i][j].markType == "Незачет") || (st.examsRecordsData[i][j].markType == "незачет"))
                                         {
                                             adeckvat = true;
                                         }
                                         else
                                         {
-                                            if ((examsRecordsData[i][j].markType == "Незачёт") || (examsRecordsData[i][j].markType == "незачёт") || (examsRecordsData[i][j].markType == "Незачет") || (examsRecordsData[i][j].markType == "незачет"))
-                                            {
-                                                adeckvat = true;
-                                            }
-                                            else
-                                            {
-                                                cout << "Ошибка. Допустимые значения: 2, 3, 4, 5, Зачёт, Незачёт." << endl;
-                                                cin.clear();
-                                                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                                            }
+                                            cout << "Ошибка. Допустимые значения: 2, 3, 4, 5, Зачёт, Незачёт." << endl;
+                                            cin.clear();
+                                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
                                         }
                                     }
                                 }
                             }
-                            if (examsRecordsData[i][j].markType == "0")
-                            {
-                                flagMark = 0;
-                            }
                         }
-                        else
+                        if (st.examsRecordsData[i][j].markType == "0")
                         {
-                            examsRecordsData[i][j].markType = "0";
+                            flagMark = 0;
                         }
+                    }
+                    else
+                    {
+                        st.examsRecordsData[i][j].markType = "0";
                     }
                 }
             }
-            else
+        }
+        else
+        {
+            st.examsRecordsData[i][j].name = "0";
+            for (int i = 0; i < 9; i++)
             {
-                examsRecordsData[i][j].name = "0";
-                for (int i = 0; i < 9; i++)
-                {
-                    examsRecordsData[i][j].markType = "0";
-                }
+                st.examsRecordsData[i][j].markType = "0";
             }
         }
     }
+    return st;
+}
+
+struct Student
+{
+    StudentNode stud;
+    struct Student* next;
 };
+
+class ListStudent
+{
+private:
+    struct Student* myHead;
+    int countItem = 0;
+public:
+    ListStudent()
+    {
+        myHead;
+        countItem = 0;
+    };
+    ~ListStudent()
+    {
+        struct Student* old = NULL;
+        struct Student* current = myHead;
+        while (current != NULL) {
+            old = current;
+            current = current->next;
+            delete old;
+        }
+    };
+
+    void addItem(StudentNode _data)
+    {
+        struct Student* newItem = new Student();
+        newItem->stud = _data;
+        if (countItem == 0)
+            newItem->next = NULL;
+        else
+            newItem->next = myHead;
+        myHead = newItem;
+        countItem++;
+    }
+
+    void insertItem(int index, StudentNode _data)
+    {
+        if (not (index >= 0 and index <= countItem and countItem >= 0))
+            return;
+        if (index == 0)
+            addItem(_data);
+        else {
+            struct Student* current = myHead;
+            for (int i = 0; i < index - 1; i++) {
+                current = current->next;
+            }
+            struct Student* newItem = new Student();
+            newItem->stud = _data;
+            newItem->next = current->next;
+            current->next = newItem;
+            countItem++;
+        }
+    }
+
+    void push_back(StudentNode _data)
+    {
+        insertItem(countItem, _data);
+    }
+
+    int getCount() 
+    {
+        return countItem;
+    }
+
+    StudentNode getItem(int index) 
+    {
+        StudentNode _data;
+        if (index >= 0 and index < countItem and countItem>0) {
+            struct Student* current = myHead;
+            for (int i = 0; i < index; i++) {
+                current = current->next;
+            }
+            _data = current->stud;
+        }
+        return _data;
+    }
+};
+
+
+
+void FyfkMagic1(int z)
+{
+    system("cls");
+    string surname, name;
+    int t;
+    StudentNode student;
+    ListStudent* st = new ListStudent;
+    cout << "Введите Фамилию и Имя студента, данные которого хотите изменить." << endl;
+    bool adeckvat = false;
+    while (adeckvat == false)
+    {
+        cout << endl << "Введите фамилию" << endl;
+        cin >> student.SurName;
+        if (student.SurName.length() > 30)
+        {
+            cout << "Превышение допустимой длины фамилии. Допустимая длина 30 символов. Вы ввели " << student.SurName.length() << " символов" << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        else
+        {
+            for (int i = 0; i < student.SurName.length(); i++)
+            {
+                bool gg = true;
+                if (!(((int(student.SurName[i]) + 256 >= 192) && (int(student.SurName[i]) + 256 <= 255)) || (int(student.SurName[i]) + 256 == 168) || (int(student.SurName[i]) + 256 == 184)))
+                {
+                    gg = false;
+                    cout << "Ошибка. В введённой строке присутствуют символы не из русского алфавита" << endl;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    adeckvat = gg;
+                    break;
+                }
+                adeckvat = gg;
+            }
+        }
+    }
+    adeckvat = false;
+    while (adeckvat == false)
+    {
+        cout << "Введите имя" << endl;
+        cin >> student.Name;
+        if (student.Name.length() > 30)
+        {
+            cout << "Превышение допустимой длины имени. Допустимая длина 30 символов. Вы ввели " << student.Name.length() << " символов" << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        else
+        {
+            for (int i = 0; i < student.Name.length(); i++)
+            {
+                bool gg = true;
+                if (!(((int(student.Name[i]) + 256 >= 192) && (int(student.Name[i]) + 256 <= 255)) || (int(student.Name[i]) + 256 == 168) || (int(student.Name[i]) + 256 == 184)))
+                {
+                    gg = false;
+                    cout << "Ошибка. В введённой строке присутствуют символы не из русского алфавита" << endl;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    adeckvat = gg;
+                    break;
+                }
+                adeckvat = gg;
+            }
+        }
+    }
+    t = st->getCount();
+    student = st->getItem(0);
+}
+
+void FyfkMagic()
+{
+    int x = -1;
+    string oshibka;
+    while (!(x == 13))
+    {
+        x = -1;
+        system("cls");
+
+        cout << "1.Изменить фамилию " << endl;
+        cout << "2.Изменить имя " << endl;
+        cout << "3.Изменить отчество " << endl;
+        cout << "4.Изменить институт " << endl;
+        cout << "5.Изменить кафедру " << endl;
+        cout << "6.Изменить группу " << endl;
+        cout << "7.Изменить номер студенческого билета " << endl;
+        cout << "8.Изменить дату рождения " << endl;
+        cout << "9.Изменить пол " << endl;
+        cout << "10.Изменить дату поступления " << endl;
+        cout << "11.Изменить название предмета " << endl;
+        cout << "12.Изменить оценку за экзамен " << endl;
+        cout << "13.Назад " << oshibka << endl;
+
+        cin >> x;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        if (x == 13)
+        {
+            system("cls");
+        }
+        else
+        {
+            if ((x<13)&&(x>0))
+            {
+                FyfkMagic1(x);
+            }
+            else
+            {
+                oshibka = "\nОшибка. Введены неверные данные. Допустимые значения 1-13 ";
+            }
+        }
+    }
+}
 
 void FCKMagic()
 {
@@ -537,7 +731,7 @@ void doSomeMagic(int x, int y)
         StudentNode student, student1;
         if (x == 1)
         {
-            student.read();
+            student = read();
             baza << endl << student.SurName << endl;
             baza << student.Name << endl;
             baza << student.middleName << endl;
@@ -564,7 +758,7 @@ void doSomeMagic(int x, int y)
         if (x == 2)
         {
             baza.close();
-                                                                                          // *
+            FyfkMagic();
         }
         if (x == 3)
         {
@@ -688,6 +882,10 @@ void menuinput()
         case 1:
             system("cls");
             doSomeMagic(a,0);
+            break;
+        case 2:
+            system("cls");
+            doSomeMagic(a, 0);
             break;
         case 3:
             system("cls");
