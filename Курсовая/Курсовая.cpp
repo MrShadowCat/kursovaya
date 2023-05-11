@@ -880,7 +880,8 @@ void MagicX2_1(int z)
         baza >> prob.SurName;
         baza >> prob.Name;
         baza >> prob.middleName;
-        baza >> prob.facultet;
+        getline(baza,prob.facultet);
+        getline(baza, prob.facultet);
         baza >> prob.department;
         baza >> prob.group;
         baza >> prob.recordCardNumber;
@@ -890,7 +891,8 @@ void MagicX2_1(int z)
         int i = 0;
         for (int j = 0; j < 10; j++)
         {
-            baza >> prob.examsRecordsData[i][j].name;
+            getline(baza, prob.examsRecordsData[i][j].name);
+            getline(baza,prob.examsRecordsData[i][j].name);
             for (int i = 0; i < 9; i++)
             {
                 baza >> prob.examsRecordsData[i][j].markType;
@@ -903,12 +905,14 @@ void MagicX2_1(int z)
     if (z == 11)
     {
         cout << "Введите название предмета, которое вы хотите изменить" << endl;
-        cin >> ExamName;
+        getline(cin, ExamName);
+        getline(cin, ExamName);
     }
     if (z == 12)
     {
         cout << "Введите название предмета, которое вы хотите изменить" << endl;
-        cin >> ExamName;
+        getline(cin, ExamName);
+        getline(cin, ExamName);
         cout << "Введите семестр, оценку которого вы хотите изменить" << endl;
         cin >> q;
     }
@@ -961,7 +965,14 @@ void MagicX2_1(int z)
                 }
                 break;
             case 12:
-
+                for (int j = 0; j < 10; j++)
+                {
+                    if (student.examsRecordsData[0][j].name == ExamName)
+                    {
+                        student.examsRecordsData[q-1][j].markType = prob.examsRecordsData[0][0].markType;
+                    }
+                }
+                break;
             default:
                 break;
             }
@@ -981,7 +992,7 @@ void MagicX2_1(int z)
         for (int j = 0; j < 10; j++)
         {
             baza << "\n";
-            baza << student.examsRecordsData[p][j].name;
+            baza << student.examsRecordsData[p][j].name << endl;
             for (int p = 0; p < 9; p++)
             {
                 baza << "  ";
@@ -1059,7 +1070,8 @@ void MagicX3()
             baza >> student.SurName;
             baza >> student.Name;
             baza >> student.middleName;
-            baza >> student.facultet;
+            getline(baza, student.facultet);
+            getline(baza, student.facultet);
             baza >> student.department;
             baza >> student.group;
             baza >> student.recordCardNumber;
@@ -1069,7 +1081,8 @@ void MagicX3()
             int i = 0;
             for (int j = 0; j < 10; j++)
             {
-                baza >> student.examsRecordsData[i][j].name;
+                getline(baza, student.examsRecordsData[i][j].name);
+                getline(baza, student.examsRecordsData[i][j].name);
                 for (int i = 0; i < 9; i++)
                 {
                     baza >> student.examsRecordsData[i][j].markType;
@@ -1180,7 +1193,7 @@ void doSomeMagic(int x, int y)
             for (int j = 0; j < 10; j++)
             {
                 baza << "\n";
-                baza << student.examsRecordsData[i][j].name;
+                baza << student.examsRecordsData[i][j].name << endl;
                 for (int i = 0; i < 9; i++)
                 {
                     baza << "  ";
@@ -1206,7 +1219,8 @@ void doSomeMagic(int x, int y)
                 baza >> student.SurName;
                 baza >> student.Name;
                 baza >> student.middleName;
-                baza >> student.facultet;
+                getline(baza, student.facultet);
+                getline(baza,student.facultet);
                 baza >> student.department;
                 baza >> student.group;
                 baza >> student.recordCardNumber;
@@ -1216,7 +1230,8 @@ void doSomeMagic(int x, int y)
                 int i = 0;
                 for (int j = 0; j < 10; j++)
                 {
-                    baza >> student.examsRecordsData[i][j].name;
+                    getline(baza, student.examsRecordsData[i][j].name);
+                    getline(baza,student.examsRecordsData[i][j].name);
                     for (int i = 0; i < 9; i++)
                     {
                         baza >> student.examsRecordsData[i][j].markType;
@@ -1232,7 +1247,7 @@ void doSomeMagic(int x, int y)
         }
         if (y == 2)
         {
-            cout << "Введите фамилию и имя сдудента, информацию которого хотите увидеть:" << endl;
+            cout << "Введите фамилию и имя студента, информацию которого хотите увидеть:" << endl;
             cin >> student1.SurName;
             cin >> student1.Name;
             cout << endl;
@@ -1241,7 +1256,8 @@ void doSomeMagic(int x, int y)
                 baza >> student.SurName;
                 baza >> student.Name;
                 baza >> student.middleName;
-                baza >> student.facultet;
+                getline(baza, student.facultet);
+                getline(baza, student.facultet);
                 baza >> student.department;
                 baza >> student.group;
                 baza >> student.recordCardNumber;
@@ -1251,7 +1267,8 @@ void doSomeMagic(int x, int y)
                 int i = 0;
                 for (int j = 0; j < 10; j++)
                 {
-                    baza >> student.examsRecordsData[i][j].name;
+                    getline(baza, student.examsRecordsData[i][j].name);
+                    getline(baza, student.examsRecordsData[i][j].name);
                     for (int i = 0; i < 9; i++)
                     {
                         baza >> student.examsRecordsData[i][j].markType;
