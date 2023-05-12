@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <list>
+#include <time.h>
 
 using namespace std;
 
@@ -1255,8 +1256,8 @@ void var73()
         }
     }
     delete[] mass;
-    string* mass1 = new string[t];
     t = xarosh->getCount();
+    string* mass1 = new string[t];
     for (int i = 0; i < t; i++)
     {
         prob = xarosh->getItem(i);
@@ -1654,9 +1655,71 @@ void menuGlav()
     }
 }
 
+void Crypt()
+{
+    srand(time(NULL));
+    char* pass = new char[64];
+    for (int i = 0; i < 64; ++i) {
+        switch (rand() % 3) {
+        case 0:
+            pass[i] = rand() % 10 + '0';
+            break;
+        case 1:
+            pass[i] = rand() % 26 + 'A';
+            break;
+        case 2:
+            pass[i] = rand() % 26 + 'a';
+        }
+    }
+    string command = "OpenSSL\\bin\\openssl.exe enc -aes-256-cbc -salt -in База.bin -out База.bin.enc -pass pass:";
+    command = command + pass;
+    system(command.c_str());
+    if (remove("База.bin") != 0) 
+    {
+        cout << "[ERROR] - deleting file" << endl;
+    }
+    ofstream file;
+    file.open("key.txt", ios::binary);
+    file << pass;
+    file.close();
+    command = "OpenSSL\\bin\\openssl.exe rsautl -encrypt -inkey rsa.public -pubin -in key.txt -out key.txt.enc";
+    system(command.c_str());
+    if (remove("key.txt") != 0) 
+    {
+        cout << "[ERROR] - deleting file" << endl;
+    }
+}
+
+void Decrypt()
+{
+    string command = "OpenSSL\\bin\\openssl.exe rsautl -decrypt -inkey rsa.private -in key.txt.enc -out key.txt";
+    system(command.c_str());
+    if (remove("key.txt.enc") != 0) 
+    {
+        cout << "[ERROR] - deleting file" << endl;
+    }
+    char* pass = new char[64];
+    ifstream file;
+    file.open("key.txt", ios::binary);
+    file >> pass;
+    file.close();
+    if (remove("key.txt") != 0) 
+    {
+        cout << "[ERROR] - deleting file" << endl;
+    }
+    command = "OpenSSL\\bin\\openssl.exe enc -aes-256-cbc -d -in База.bin.enc -out База.bin -pass pass:";
+    command = command + pass;
+    system(command.c_str());
+    if (remove("База.bin.enc") != 0) 
+    {
+        cout << "[ERROR] - deleting file" << endl;
+    }
+}
+
 int main()
 {
-    system("chcp 1251 > nul");              
-
+    system("chcp 1251 > nul");
+    Decrypt();
     menuGlav();
+    Crypt();
 }
