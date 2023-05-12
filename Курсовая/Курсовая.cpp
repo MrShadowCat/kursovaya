@@ -112,7 +112,6 @@ public:
 StudentNode read(int z)
 {
     StudentNode st;
-    system("cls");
     bool adeckvat = false;
     int dd, mm, gggg;
     switch (z)
@@ -1049,125 +1048,339 @@ void MagicX2()
 
 void MagicX3()
 {
-    StudentNode student1, student;
     string file1 = "База.bin";
-    fstream baza(file1, fstream::binary | fstream::in | fstream::out | fstream::app);
     cout << "Введите Фамилию и Имя студента, данные которого хотите удалить." << endl;
     cout << "Если хотите удалить данные всех студентов введите <Все>" << endl;
-    cin >> student1.SurName;
-
-    if ((student1.SurName == "все") || (student1.SurName == "Все") || (student1.SurName == "ВСЕ"))
+    string surname, name;
+    int t;
+    StudentNode student, prob;
+    ListStudent* st = new ListStudent;
+    prob = read(1);
+    surname = prob.SurName;
+    if ((surname == "все") || (surname == "Все") || (surname == "ВСЕ"))
     {
-        baza.close();
         remove("База.bin");
     }
     else
     {
-        cin >> student1.Name;
-        int ochko = 0;
+        prob = read(2);
+        name = prob.Name;
+        fstream baza(file1, fstream::binary | fstream::in | fstream::out | fstream::app);
         while (!baza.eof())
         {
-            baza >> student.SurName;
-            baza >> student.Name;
-            baza >> student.middleName;
-            getline(baza, student.facultet);
-            getline(baza, student.facultet);
-            baza >> student.department;
-            baza >> student.group;
-            baza >> student.recordCardNumber;
-            baza >> student.birthDateString;
-            baza >> student.pol;
-            baza >> student.startYear;
+            baza >> prob.SurName;
+            baza >> prob.Name;
+            baza >> prob.middleName;
+            getline(baza, prob.facultet);
+            getline(baza, prob.facultet);
+            baza >> prob.department;
+            baza >> prob.group;
+            baza >> prob.recordCardNumber;
+            baza >> prob.birthDateString;
+            baza >> prob.pol;
+            baza >> prob.startYear;
             int i = 0;
             for (int j = 0; j < 10; j++)
             {
-                getline(baza, student.examsRecordsData[i][j].name);
-                getline(baza, student.examsRecordsData[i][j].name);
+                getline(baza, prob.examsRecordsData[i][j].name);
+                getline(baza, prob.examsRecordsData[i][j].name);
                 for (int i = 0; i < 9; i++)
                 {
-                    baza >> student.examsRecordsData[i][j].markType;
+                    baza >> prob.examsRecordsData[i][j].markType;
                 }
             }
-            ochko = ochko + 1;
+            st->push_back(prob);
         }
-        StudentNode* mass = new StudentNode[ochko];
         baza.close();
-        fstream baza(file1, fstream::binary | fstream::in | fstream::out | fstream::app);
-        if (!(baza.is_open()))
+        remove("База.bin");
+        t = st->getCount();
+        for (int i = 0; i < t; i++)
         {
-            cout << "Ошибка открытия файла" << endl;
-        }
-        else
-        {
-            for (int p = 0; p < ochko; p++)
+            student = st->getItem(i);
+            if (!((student.SurName == surname)&&(student.Name == name)))
             {
-                baza >> mass[p].SurName;
-                baza >> mass[p].Name;
-                baza >> mass[p].middleName;
-                baza >> mass[p].facultet;
-                baza >> mass[p].department;
-                baza >> mass[p].group;
-                baza >> mass[p].recordCardNumber;
-                baza >> mass[p].birthDateString;
-                baza >> mass[p].pol;
-                baza >> mass[p].startYear;
-                int i = 0;
+                fstream baza(file1, fstream::binary | fstream::in | fstream::out | fstream::app);
+                baza << endl << student.SurName << endl;
+                baza << student.Name << endl;
+                baza << student.middleName << endl;
+                baza << student.facultet << endl;
+                baza << student.department << endl;
+                baza << student.group << endl;
+                baza << student.recordCardNumber << endl;
+                baza << student.birthDateString << endl;
+                baza << student.pol << endl;
+                baza << student.startYear;
+                int p = 0;
                 for (int j = 0; j < 10; j++)
                 {
-                    baza >> mass[p].examsRecordsData[i][j].name;
-                    for (int i = 0; i < 9; i++)
+                    baza << "\n";
+                    baza << student.examsRecordsData[p][j].name << endl;
+                    for (int p = 0; p < 9; p++)
                     {
-                        baza >> mass[p].examsRecordsData[i][j].markType;
-                    }
-                }
-            }
-            baza.close();
-            remove("База.bin");
-            fstream baza(file1, fstream::binary | fstream::in | fstream::out | fstream::app);
-            if (!(baza.is_open()))
-            {
-                cout << "Ошибка открытия файла" << endl;
-            }
-            else
-            {
-                for (int p = 0; p < ochko; p++)
-                {
-                    if (!((mass[p].SurName == student1.SurName)&&(mass[p].Name == student1.Name)))
-                    {
-                        baza << endl << mass[p].SurName << endl;
-                        baza << mass[p].Name << endl;
-                        baza << mass[p].middleName << endl;
-                        baza << mass[p].facultet << endl;
-                        baza << mass[p].department << endl;
-                        baza << mass[p].group << endl;
-                        baza << mass[p].recordCardNumber << endl;
-                        baza << mass[p].birthDateString << endl;
-                        baza << mass[p].pol << endl;
-                        baza << mass[p].startYear;
-                        int i = 0;
-                        for (int j = 0; j < 10; j++)
-                        {
-                            baza << "\n";
-                            baza << mass[p].examsRecordsData[i][j].name;
-                            for (int i = 0; i < 9; i++)
-                            {
-                                baza << "  ";
-                                baza << mass[p].examsRecordsData[i][j].markType;
-                            }
-                        }
+                        baza << "  ";
+                        baza << student.examsRecordsData[p][j].markType;
                     }
                 }
                 baza.close();
             }
         }
-        delete[] mass;
     }
+}
+
+void var73()
+{
+    system("cls");
+    ListStudent* megaxarosh = new ListStudent;
+    ListStudent* xarosh = new ListStudent;
+    ListStudent* normas = new ListStudent;
+    string file1 = "База.bin";
+    int t, mark;
+    StudentNode student, prob;
+    fstream baza(file1, fstream::binary | fstream::in | fstream::out | fstream::app);
+    while (!baza.eof())
+    {
+        mark = 0;
+        baza >> prob.SurName;
+        baza >> prob.Name;
+        baza >> prob.middleName;
+        getline(baza, prob.facultet);
+        getline(baza, prob.facultet);
+        baza >> prob.department;
+        baza >> prob.group;
+        baza >> prob.recordCardNumber;
+        baza >> prob.birthDateString;
+        baza >> prob.pol;
+        baza >> prob.startYear;
+        int i = 0;
+        for (int j = 0; j < 10; j++)
+        {
+            getline(baza, prob.examsRecordsData[i][j].name);
+            getline(baza, prob.examsRecordsData[i][j].name);
+            for (int i = 0; i < 9; i++)
+            {
+                baza >> prob.examsRecordsData[i][j].markType;
+                if ((prob.examsRecordsData[i][j].markType == "2") || (prob.examsRecordsData[i][j].markType == "3") || (prob.examsRecordsData[i][j].markType == "незачёт") || (prob.examsRecordsData[i][j].markType == "Незачёт") || (prob.examsRecordsData[i][j].markType == "Незачет") || (prob.examsRecordsData[i][j].markType == "незачет"))
+                {
+                    mark = 3;
+                }
+                else
+                {
+                    if (!(mark==3) && (prob.examsRecordsData[i][j].markType == "4"))
+                    {
+                        mark = 4;
+                    }
+                    else
+                    {
+                        if (!(mark == 4))
+                        {
+                            mark = 5;
+                        }
+                    }
+                }
+            }
+        }
+        if (mark == 5)
+        {
+            megaxarosh->push_back(prob);
+        }
+        if (mark == 4)
+        {
+            xarosh->push_back(prob);
+        }
+        if (mark == 3)
+        {
+            normas->push_back(prob);
+        }
+    }
+    baza.close();
+    remove("База.bin");
+    t = megaxarosh->getCount();
+    string *mass = new string[t];
+    string len;
+    for (int i = 0; i < t; i++)
+    {
+        prob = megaxarosh->getItem(i);
+        mass[i] = prob.SurName;
+    }
+    for (int i = 0; i < t; i++)
+    {
+        for (int j = 0; j < t-1; j++)
+        {
+            if (mass[j] > mass[j+1])
+            {
+                len = mass[j];
+                mass[j] = mass[j + 1];
+                mass[j + 1] = len;
+            }
+        }
+    }
+    cout << "Отличники: " << endl;
+    for (int i = 0; i < t; i++)
+    {
+        for (int j = 0; j < t; j++)
+        {
+            prob = megaxarosh->getItem(j);
+            if (mass[i] == prob.SurName)
+            {
+                fstream baza(file1, fstream::binary | fstream::in | fstream::out | fstream::app);
+                baza << endl << prob.SurName << endl;
+                baza << prob.Name << endl;
+                baza << prob.middleName << endl;
+                baza << prob.facultet << endl;
+                baza << prob.department << endl;
+                baza << prob.group << endl;
+                baza << prob.recordCardNumber << endl;
+                baza << prob.birthDateString << endl;
+                baza << prob.pol << endl;
+                baza << prob.startYear;
+                int p = 0;
+                for (int e = 0; e < 10; e++)
+                {
+                    baza << "\n";
+                    baza << prob.examsRecordsData[p][e].name << endl;
+                    for (int p = 0; p < 9; p++)
+                    {
+                        baza << "  ";
+                        baza << prob.examsRecordsData[p][e].markType;
+                    }
+                }
+                baza.close();
+                cout << prob.SurName << "  ";
+                cout << prob.Name << "  ";
+                cout << prob.middleName << "  ";
+                cout << prob.group << "  ";
+                cout << prob.startYear << endl;
+                break;
+            }
+        }
+    }
+    delete[] mass;
+    string* mass1 = new string[t];
+    t = xarosh->getCount();
+    for (int i = 0; i < t; i++)
+    {
+        prob = xarosh->getItem(i);
+        mass1[i] = prob.SurName;
+    }
+    for (int i = 0; i < t; i++)
+    {
+        for (int j = 0; j < t - 1; j++)
+        {
+            if (mass1[j] > mass1[j + 1])
+            {
+                len = mass1[j];
+                mass1[j] = mass1[j + 1];
+                mass1[j + 1] = len;
+            }
+        }
+    }
+    cout << "Хорошисты: " << endl;
+    for (int i = 0; i < t; i++)
+    {
+        for (int j = 0; j < t; j++)
+        {
+            prob = xarosh->getItem(j);
+            if (mass1[i] == prob.SurName)
+            {
+                fstream baza(file1, fstream::binary | fstream::in | fstream::out | fstream::app);
+                baza << endl << prob.SurName << endl;
+                baza << prob.Name << endl;
+                baza << prob.middleName << endl;
+                baza << prob.facultet << endl;
+                baza << prob.department << endl;
+                baza << prob.group << endl;
+                baza << prob.recordCardNumber << endl;
+                baza << prob.birthDateString << endl;
+                baza << prob.pol << endl;
+                baza << prob.startYear;
+                int p = 0;
+                for (int e = 0; e < 10; e++)
+                {
+                    baza << "\n";
+                    baza << prob.examsRecordsData[p][e].name << endl;
+                    for (int p = 0; p < 9; p++)
+                    {
+                        baza << "  ";
+                        baza << prob.examsRecordsData[p][e].markType;
+                    }
+                }
+                baza.close();
+                cout << prob.SurName << "  ";
+                cout << prob.Name << "  ";
+                cout << prob.middleName << "  ";
+                cout << prob.group << "  ";
+                cout << prob.startYear << endl;
+                break;
+            }
+        }
+    }
+    delete[] mass1;
+    t = normas->getCount();
+    string* mass2 = new string[t];
+    for (int i = 0; i < t; i++)
+    {
+        prob = normas->getItem(i);
+        mass2[i] = prob.SurName;
+    }
+    for (int i = 0; i < t; i++)
+    {
+        for (int j = 0; j < t - 1; j++)
+        {
+            if (mass2[j] > mass2[j + 1])
+            {
+                len = mass2[j];
+                mass2[j] = mass2[j + 1];
+                mass2[j + 1] = len;
+            }
+        }
+    }
+    cout << "Троечники: " << endl;
+    for (int i = 0; i < t; i++)
+    {
+        for (int j = 0; j < t; j++)
+        {
+            prob = normas->getItem(j);
+            if (mass2[i] == prob.SurName)
+            {
+                fstream baza(file1, fstream::binary | fstream::in | fstream::out | fstream::app);
+                baza << endl << prob.SurName << endl;
+                baza << prob.Name << endl;
+                baza << prob.middleName << endl;
+                baza << prob.facultet << endl;
+                baza << prob.department << endl;
+                baza << prob.group << endl;
+                baza << prob.recordCardNumber << endl;
+                baza << prob.birthDateString << endl;
+                baza << prob.pol << endl;
+                baza << prob.startYear;
+                int p = 0;
+                for (int e = 0; e < 10; e++)
+                {
+                    baza << "\n";
+                    baza << prob.examsRecordsData[p][e].name << endl;
+                    for (int p = 0; p < 9; p++)
+                    {
+                        baza << "  ";
+                        baza << prob.examsRecordsData[p][e].markType;
+                    }
+                }
+                baza.close();
+                cout << prob.SurName << "  ";
+                cout << prob.Name << "  ";
+                cout << prob.middleName << "  ";
+                cout << prob.group << "  ";
+                cout << prob.startYear << endl;
+                break;
+            }
+        }
+    }
+    delete[] mass2;
 }
 
 void doSomeMagic(int x, int y)
 {
     system("cls");
-    string file1 = "База.bin", file2 = "База_коп.bin";
+    string file1 = "База.bin";
     fstream baza(file1, fstream::binary | fstream::in | fstream::out | fstream::app);
     if (!(baza.is_open()))
     {
@@ -1308,6 +1521,11 @@ void doSomeMagic(int x, int y)
             }
             baza.close();
         }
+        if (y == 3)
+        {
+            baza.close();
+            var73();
+        }
     }
 }
 
@@ -1379,6 +1597,10 @@ void menuoutput()
             doSomeMagic(0, a);
             break;
         case 2:
+            system("cls");
+            doSomeMagic(0, a);
+            break;
+        case 3:
             system("cls");
             doSomeMagic(0, a);
             break;
