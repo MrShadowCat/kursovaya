@@ -1,7 +1,6 @@
 ﻿#include <iostream>
 #include <string>
 #include <fstream>
-#include <list>
 #include <time.h>
 
 using namespace std;
@@ -488,266 +487,6 @@ StudentNode read(int z)
         return st;
         break;
     default:
-        adeckvat = false;
-        while (adeckvat == false)
-        {
-            cout << endl << "Введите фамилию" << endl;
-            cin >> st.SurName;
-            if (st.SurName.length() > 30)
-            {
-                cout << "Превышение допустимой длины фамилии. Допустимая длина 30 символов. Вы ввели " << st.SurName.length() << " символов" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else
-            {
-                for (int i = 0; i < st.SurName.length(); i++)
-                {
-                    bool gg = true;
-                    if (!(((int(st.SurName[i]) + 256 >= 192) && (int(st.SurName[i]) + 256 <= 255)) || (int(st.SurName[i]) + 256 == 168) || (int(st.SurName[i]) + 256 == 184)))
-                    {
-                        gg = false;
-                        cout << "Ошибка. В введённой строке присутствуют символы не из русского алфавита" << endl;
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                        adeckvat = gg;
-                        break;
-                    }
-                    adeckvat = gg;
-                }
-            }
-        }
-        adeckvat = false;
-        while (adeckvat == false)
-        {
-            cout << "Введите имя" << endl;
-            cin >> st.Name;
-            if (st.Name.length() > 30)
-            {
-                cout << "Превышение допустимой длины имени. Допустимая длина 30 символов. Вы ввели " << st.Name.length() << " символов" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else
-            {
-                for (int i = 0; i < st.Name.length(); i++)
-                {
-                    bool gg = true;
-                    if (!(((int(st.Name[i]) + 256 >= 192) && (int(st.Name[i]) + 256 <= 255)) || (int(st.Name[i]) + 256 == 168) || (int(st.Name[i]) + 256 == 184)))
-                    {
-                        gg = false;
-                        cout << "Ошибка. В введённой строке присутствуют символы не из русского алфавита" << endl;
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                        adeckvat = gg;
-                        break;
-                    }
-                    adeckvat = gg;
-                }
-            }
-        }
-        adeckvat = false;
-        while (adeckvat == false)
-        {
-            cout << "Введите отчество" << endl;
-            cin >> st.middleName;
-            if (st.middleName.length() > 30)
-            {
-                cout << "Превышение допустимой длины отчества. Допустимая длина 30 символов. Вы ввели " << st.middleName.length() << " символов" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else
-            {
-                for (int i = 0; i < st.middleName.length(); i++)
-                {
-                    bool gg = true;
-                    if (!(((int(st.middleName[i]) + 256 >= 192) && (int(st.middleName[i]) + 256 <= 255)) || (int(st.middleName[i]) + 256 == 168) || (int(st.middleName[i]) + 256 == 184)))
-                    {
-                        gg = false;
-                        cout << "Ошибка. В введённой строке присутствуют символы не из русского алфавита" << endl;
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                        adeckvat = gg;
-                        break;
-                    }
-                    adeckvat = gg;
-                }
-            }
-        }
-        getline(cin, st.facultet);
-        adeckvat = false;
-        while (adeckvat == false)
-        {
-            cout << "Введите институт" << endl;
-            getline(cin, st.facultet);
-            if (st.facultet.length() > 30)
-            {
-                cout << "Превышение допустимой длины института. Допустимая длина 30 символов. Вы ввели " << st.facultet.length() << " символов" << endl;
-                cin.clear();
-            }
-            else
-            {
-                for (int i = 0; i < st.facultet.length(); i++)
-                {
-                    bool gg = true;
-                    if (!(((int(st.facultet[i]) + 256 >= 192) && (int(st.facultet[i]) + 256 <= 255)) || (int(st.facultet[i]) + 256 == 168) || (int(st.facultet[i]) + 256 == 184) || (int(st.facultet[i]) == 32)))
-                    {
-                        gg = false;
-                        cout << "Ошибка. В введённой строке присутствуют символы не из русского алфавита" << endl;
-                        cin.clear();
-                        adeckvat = gg;
-                        break;
-                    }
-                    adeckvat = gg;
-                }
-            }
-        }
-        adeckvat = false;
-        while (adeckvat == false)
-        {
-            cout << "Введите кафедру" << endl;
-            cin >> st.department;
-            if (st.department.length() > 10)
-            {
-                cout << "Превышение допустимой длины кафедры. Допустимая длина 10 символов. Вы ввели " << st.department.length() << " символов" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else
-            {
-                adeckvat = true;
-            }
-        }
-        adeckvat = false;
-        while (adeckvat == false)
-        {
-            cout << "Введите группу" << endl;
-            cin >> st.group;
-            if (st.group.length() > 10)
-            {
-                cout << "Превышение допустимой длины группы. Допустимая длина 10 символов. Вы ввели " << st.group.length() << " символов" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else
-            {
-                adeckvat = true;
-            }
-        }
-        adeckvat = false;
-        while (adeckvat == false)
-        {
-            cout << "Введите номер студенческого билета" << endl;
-            cin >> st.recordCardNumber;
-            if (st.recordCardNumber.length() > 10)
-            {
-                cout << "Превышение допустимой длины номера студенческого билета. Допустимая длина 10 символов. Вы ввели " << st.recordCardNumber.length() << " символов" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else
-            {
-                adeckvat = true;
-            }
-        }
-        cout << "Введите дату рождения (ДД.ММ.ГГГГ)" << endl;
-        adeckvat = false;
-        while (adeckvat == false)
-        {
-            cout << "ДД: " << endl;
-            cin >> dd;
-            if (!((dd > 0) && (dd < 32)))
-            {
-                cout << "Ошибка. Допустимые значения 1-31" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else
-            {
-                adeckvat = true;
-            }
-        }
-        adeckvat = false;
-        while (adeckvat == false)
-        {
-            cout << "ММ: " << endl;
-            cin >> mm;
-            if (!((mm > 0) && (mm < 13)))
-            {
-                cout << "Ошибка. Допустимые значения 1-12" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else
-            {
-                adeckvat = true;
-            }
-        }
-        adeckvat = false;
-        while (adeckvat == false)
-        {
-            cout << "ГГГГ: " << endl;
-            cin >> gggg;
-            if (!((gggg > 1989) && (gggg < 2006)))
-            {
-                cout << "Ошибка. Допустимые значения 1990-2005" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else
-            {
-                adeckvat = true;
-            }
-        }
-        st.birthDateString = to_string(dd) + "." + to_string(mm) + "." + to_string(gggg);
-        cout << st.birthDateString << endl;
-        adeckvat = false;
-        while (adeckvat == false)
-        {
-            cout << "Введите пол: М или Ж" << endl;
-            cin >> st.pol;
-            if (!((st.pol == "ж") || (st.pol == "Ж") || (st.pol == "м") || (st.pol == "М")))
-            {
-                cout << "Ошибка. Вы ввели " << st.pol << " Допустимые значения М или Ж." << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else
-            {
-                adeckvat = true;
-            }
-        }
-        adeckvat = false;
-        while (adeckvat == false)
-        {
-            cout << "Введите год поступления" << endl;
-            cin >> st.startYear;
-            for (int i = 0; i < st.startYear.length(); i++)
-            {
-                if (int(st.startYear[i]) < 48 || int(st.startYear[i]) > 58)
-                {
-                    cout << "Ошибка в строке присутствуют знаки отличные от цифр" << endl;
-                    cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                    break;
-                }
-                else
-                {
-                    if ((st.startYear < "1990") || (st.startYear > "2022"))
-                    {
-                        cout << "Ошибка. Выход из допустимого диапазона (1990-2022)" << endl;
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                        break;
-                    }
-                    else
-                    {
-                        adeckvat = true;
-                    }
-                }
-            }
-        }
         int i = 0;
         int flagName = 1;
         for (int j = 0; j < 10; j++)
@@ -865,7 +604,7 @@ void MagicX2_1(int z)
 {
     system("cls");
     string surname, name, ExamName;
-    int t, q;
+    int t, q=0;
     StudentNode student, prob;
     ListStudent* st = new ListStudent;
     cout << "Введите Фамилию и Имя студента, данные которого хотите изменить." << endl;
@@ -1172,7 +911,7 @@ void var73()
                     }
                     else
                     {
-                        if (!(mark == 4))
+                        if (!(mark == 4) && !(mark == 3) && !(prob.examsRecordsData[i][j].markType == "0"))
                         {
                             mark = 5;
                         }
@@ -1194,10 +933,12 @@ void var73()
         }
     }
     baza.close();
-    remove("База.bin");
     t = megaxarosh->getCount();
     string *mass = new string[t];
-    string len;
+    string len, god1, god2, god;
+    cout << "Введите интервал годов рождения через пробел" << endl;
+    cin >> god1;
+    cin >> god2;
     for (int i = 0; i < t; i++)
     {
         prob = megaxarosh->getItem(i);
@@ -1223,34 +964,17 @@ void var73()
             prob = megaxarosh->getItem(j);
             if (mass[i] == prob.SurName)
             {
-                fstream baza(file1, fstream::binary | fstream::in | fstream::out | fstream::app);
-                baza << endl << prob.SurName << endl;
-                baza << prob.Name << endl;
-                baza << prob.middleName << endl;
-                baza << prob.facultet << endl;
-                baza << prob.department << endl;
-                baza << prob.group << endl;
-                baza << prob.recordCardNumber << endl;
-                baza << prob.birthDateString << endl;
-                baza << prob.pol << endl;
-                baza << prob.startYear;
-                int p = 0;
-                for (int e = 0; e < 10; e++)
+                god = prob.birthDateString[prob.birthDateString.length() - 4];
+                god = god + prob.birthDateString[prob.birthDateString.length() - 3];
+                god = god + prob.birthDateString[prob.birthDateString.length() - 2];
+                god = god + prob.birthDateString[prob.birthDateString.length() - 1];
+                if ((god >= god1) && (god <= god2))
                 {
-                    baza << "\n";
-                    baza << prob.examsRecordsData[p][e].name << endl;
-                    for (int p = 0; p < 9; p++)
-                    {
-                        baza << "  ";
-                        baza << prob.examsRecordsData[p][e].markType;
-                    }
+                    cout << prob.SurName << "  ";
+                    cout << prob.Name << "  ";
+                    cout << prob.middleName << "  ";
+                    cout << prob.group << "  " << endl;
                 }
-                baza.close();
-                cout << prob.SurName << "  ";
-                cout << prob.Name << "  ";
-                cout << prob.middleName << "  ";
-                cout << prob.group << "  ";
-                cout << prob.startYear << endl;
                 break;
             }
         }
@@ -1283,34 +1007,17 @@ void var73()
             prob = xarosh->getItem(j);
             if (mass1[i] == prob.SurName)
             {
-                fstream baza(file1, fstream::binary | fstream::in | fstream::out | fstream::app);
-                baza << endl << prob.SurName << endl;
-                baza << prob.Name << endl;
-                baza << prob.middleName << endl;
-                baza << prob.facultet << endl;
-                baza << prob.department << endl;
-                baza << prob.group << endl;
-                baza << prob.recordCardNumber << endl;
-                baza << prob.birthDateString << endl;
-                baza << prob.pol << endl;
-                baza << prob.startYear;
-                int p = 0;
-                for (int e = 0; e < 10; e++)
+                god = prob.birthDateString[prob.birthDateString.length() - 4];
+                god = god + prob.birthDateString[prob.birthDateString.length() - 3];
+                god = god + prob.birthDateString[prob.birthDateString.length() - 2];
+                god = god + prob.birthDateString[prob.birthDateString.length() - 1];
+                if ((god >= god1) && (god <= god2))
                 {
-                    baza << "\n";
-                    baza << prob.examsRecordsData[p][e].name << endl;
-                    for (int p = 0; p < 9; p++)
-                    {
-                        baza << "  ";
-                        baza << prob.examsRecordsData[p][e].markType;
-                    }
+                    cout << prob.SurName << "  ";
+                    cout << prob.Name << "  ";
+                    cout << prob.middleName << "  ";
+                    cout << prob.group << "  " << endl;
                 }
-                baza.close();
-                cout << prob.SurName << "  ";
-                cout << prob.Name << "  ";
-                cout << prob.middleName << "  ";
-                cout << prob.group << "  ";
-                cout << prob.startYear << endl;
                 break;
             }
         }
@@ -1343,34 +1050,17 @@ void var73()
             prob = normas->getItem(j);
             if (mass2[i] == prob.SurName)
             {
-                fstream baza(file1, fstream::binary | fstream::in | fstream::out | fstream::app);
-                baza << endl << prob.SurName << endl;
-                baza << prob.Name << endl;
-                baza << prob.middleName << endl;
-                baza << prob.facultet << endl;
-                baza << prob.department << endl;
-                baza << prob.group << endl;
-                baza << prob.recordCardNumber << endl;
-                baza << prob.birthDateString << endl;
-                baza << prob.pol << endl;
-                baza << prob.startYear;
-                int p = 0;
-                for (int e = 0; e < 10; e++)
+                god = prob.birthDateString[prob.birthDateString.length() - 4];
+                god = god + prob.birthDateString[prob.birthDateString.length() - 3];
+                god = god + prob.birthDateString[prob.birthDateString.length() - 2];
+                god = god + prob.birthDateString[prob.birthDateString.length() - 1];
+                if ((god >= god1) && (god <= god2))
                 {
-                    baza << "\n";
-                    baza << prob.examsRecordsData[p][e].name << endl;
-                    for (int p = 0; p < 9; p++)
-                    {
-                        baza << "  ";
-                        baza << prob.examsRecordsData[p][e].markType;
-                    }
+                    cout << prob.SurName << "  ";
+                    cout << prob.Name << "  ";
+                    cout << prob.middleName << "  ";
+                    cout << prob.group << "  " << endl;
                 }
-                baza.close();
-                cout << prob.SurName << "  ";
-                cout << prob.Name << "  ";
-                cout << prob.middleName << "  ";
-                cout << prob.group << "  ";
-                cout << prob.startYear << endl;
                 break;
             }
         }
@@ -1392,7 +1082,36 @@ void doSomeMagic(int x, int y)
         StudentNode student, student1;
         if (x == 1)
         {
-            student = read(0);
+            student1 = read(1);
+            student.SurName = student1.SurName;
+            student1 = read(2);
+            student.Name = student1.Name;
+            student1 = read(3);
+            student.middleName = student1.middleName;
+            student1 = read(4);
+            student.facultet = student1.facultet;
+            student1 = read(5);
+            student.department = student1.department;
+            student1 = read(6);
+            student.group = student1.group;
+            student1 = read(7);
+            student.recordCardNumber = student1.recordCardNumber;
+            student1 = read(8);
+            student.birthDateString = student1.birthDateString;
+            student1 = read(9);
+            student.pol = student1.pol;
+            student1 = read(10);
+            student.startYear = student1.startYear;
+            student1 = read(0);
+            int i = 0;
+            for (int j = 0; j < 10; j++)
+            {
+                student.examsRecordsData[i][j].name = student1.examsRecordsData[i][j].name;
+                for (int i = 0; i < 9; i++)
+                {
+                    student.examsRecordsData[i][j].markType = student1.examsRecordsData[i][j].markType;
+                }
+            }
             baza << endl << student.SurName << endl;
             baza << student.Name << endl;
             baza << student.middleName << endl;
@@ -1403,7 +1122,7 @@ void doSomeMagic(int x, int y)
             baza << student.birthDateString << endl;
             baza << student.pol << endl;
             baza << student.startYear;
-            int i = 0;
+            i = 0;
             for (int j = 0; j < 10; j++)
             {
                 baza << "\n";

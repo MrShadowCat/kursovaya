@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ListStudent">
+    <Position X="8.25" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAwAAEAAAAAAGCIABAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Курсовая.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="ExamsRecords">
+    <Position X="2.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Курсовая.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Student">
+    <Position X="6.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Курсовая.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="StudentNode">
+    <Position X="4.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAAAAAAIAAAAAAAAAAAEAIQQEAAAAACEgAAAAAAAAAA=</HashCode>
+      <FileName>Курсовая.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
