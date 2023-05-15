@@ -219,9 +219,9 @@ StudentNode read(int z)
         {
             cout << "Введите институт" << endl;
             getline(cin, st.facultet);
-            if (st.facultet.length() > 30)
+            if (st.facultet.length() > 50)
             {
-                cout << "Превышение допустимой длины института. Допустимая длина 30 символов. Вы ввели " << st.facultet.length() << " символов" << endl;
+                cout << "Превышение допустимой длины института. Допустимая длина 50 символов. Вы ввели " << st.facultet.length() << " символов" << endl;
                 cin.clear();
             }
             else
@@ -933,12 +933,12 @@ void var73()
         }
     }
     baza.close();
-    t = megaxarosh->getCount();
-    string *mass = new string[t];
     string len, god1, god2, god;
     cout << "Введите интервал годов рождения через пробел" << endl;
     cin >> god1;
     cin >> god2;
+    t = megaxarosh->getCount();
+    string* mass = new string[t];
     for (int i = 0; i < t; i++)
     {
         prob = megaxarosh->getItem(i);
@@ -956,7 +956,7 @@ void var73()
             }
         }
     }
-    cout << "Отличники: " << endl;
+    cout << "\nОтличники: " << endl;
     for (int i = 0; i < t; i++)
     {
         for (int j = 0; j < t; j++)
@@ -970,10 +970,28 @@ void var73()
                 god = god + prob.birthDateString[prob.birthDateString.length() - 1];
                 if ((god >= god1) && (god <= god2))
                 {
+                    cout << endl;
                     cout << prob.SurName << "  ";
                     cout << prob.Name << "  ";
                     cout << prob.middleName << "  ";
                     cout << prob.group << "  " << endl;
+                    int i = 0;
+                    for (int j = 0; j < 10; j++)
+                    {
+                        if (!(prob.examsRecordsData[i][j].name == "0"))
+                        {
+                            cout << "Предмет: ";
+                            cout << prob.examsRecordsData[i][j].name << endl;
+                            for (int i = 0; i < 9; i++)
+                            {
+                                if (!(prob.examsRecordsData[i][j].markType == "0"))
+                                {
+                                    cout << prob.examsRecordsData[i][j].markType << "  ";
+                                }
+                            }
+                            cout << endl;
+                        }
+                    }
                 }
                 break;
             }
@@ -999,7 +1017,7 @@ void var73()
             }
         }
     }
-    cout << "Хорошисты: " << endl;
+    cout << "\nХорошисты: " << endl;
     for (int i = 0; i < t; i++)
     {
         for (int j = 0; j < t; j++)
@@ -1013,10 +1031,28 @@ void var73()
                 god = god + prob.birthDateString[prob.birthDateString.length() - 1];
                 if ((god >= god1) && (god <= god2))
                 {
+                    cout << endl;
                     cout << prob.SurName << "  ";
                     cout << prob.Name << "  ";
                     cout << prob.middleName << "  ";
                     cout << prob.group << "  " << endl;
+                    int i = 0;
+                    for (int j = 0; j < 10; j++)
+                    {
+                        if (!(prob.examsRecordsData[i][j].name == "0"))
+                        {
+                            cout << "Предмет: ";
+                            cout << prob.examsRecordsData[i][j].name << endl;
+                            for (int i = 0; i < 9; i++)
+                            {
+                                if (!(prob.examsRecordsData[i][j].markType == "0"))
+                                {
+                                    cout << prob.examsRecordsData[i][j].markType << "  ";
+                                }
+                            }
+                            cout << endl;
+                        }
+                    }
                 }
                 break;
             }
@@ -1042,7 +1078,7 @@ void var73()
             }
         }
     }
-    cout << "Троечники: " << endl;
+    cout << "\nТроечники: " << endl;
     for (int i = 0; i < t; i++)
     {
         for (int j = 0; j < t; j++)
@@ -1056,10 +1092,28 @@ void var73()
                 god = god + prob.birthDateString[prob.birthDateString.length() - 1];
                 if ((god >= god1) && (god <= god2))
                 {
+                    cout << endl;
                     cout << prob.SurName << "  ";
                     cout << prob.Name << "  ";
                     cout << prob.middleName << "  ";
                     cout << prob.group << "  " << endl;
+                    int i = 0;
+                    for (int j = 0; j < 10; j++)
+                    {
+                        if (!(prob.examsRecordsData[i][j].name == "0"))
+                        {
+                            cout << "Предмет: ";
+                            cout << prob.examsRecordsData[i][j].name << endl;
+                            for (int i = 0; i < 9; i++)
+                            {
+                                if (!(prob.examsRecordsData[i][j].markType == "0"))
+                                {
+                                    cout << prob.examsRecordsData[i][j].markType << "  ";
+                                }
+                            }
+                            cout << endl;
+                        }
+                    }
                 }
                 break;
             }
@@ -1170,10 +1224,13 @@ void doSomeMagic(int x, int y)
                         baza >> student.examsRecordsData[i][j].markType;
                     }
                 }
-
+                cout << "Фамилия: " << " ";
                 cout << student.SurName << "  ";
+                cout << "Имя: " << " ";
                 cout << student.Name << "  ";
+                cout << "Отчество: " << " ";
                 cout << student.middleName << "  ";
+                cout << "Группа: " << " ";
                 cout << student.group << "  " << endl;
             }
             baza.close();
@@ -1210,29 +1267,40 @@ void doSomeMagic(int x, int y)
 
                 if ((student.SurName == student1.SurName)&&(student.Name == student1.Name))
                 {
+                    cout << "Фамилия: " << " ";
                     cout << student.SurName << "  ";
+                    cout << "Имя: " << " ";
                     cout << student.Name << "  ";
+                    cout << "Отчество: " << " ";
                     cout << student.middleName << endl;
+                    cout << "Институт: " << " ";
                     cout << student.facultet << endl;
+                    cout << "Кафедра: " << " ";
                     cout << student.department << endl;
+                    cout << "Группа: " << " ";
                     cout << student.group << endl;
+                    cout << "Номер студенческого билета: " << " ";
                     cout << student.recordCardNumber << endl;
+                    cout << "Дата рождения: " << " ";
                     cout << student.birthDateString << endl;
+                    cout << "Пол: " << " ";
                     cout << student.pol << endl;
+                    cout << "Год поступления: " << " ";
                     cout << student.startYear << endl;
                     int i = 0;
                     for (int j = 0; j < 10; j++)
                     {
                         if (!(student.examsRecordsData[i][j].name == "0"))
                         {
+                            cout << "Предмет: " << " ";
                             cout << student.examsRecordsData[i][j].name << endl;
                             for (int i = 0; i < 9; i++)
                             {
                                 if (!(student.examsRecordsData[i][j].markType == "0"))
                                 {
+                                    cout << "Семестр" << i+1 <<": " << " ";
                                     cout << student.examsRecordsData[i][j].markType << "  ";
                                 }
-
                             }
                             cout << endl;
                         }
