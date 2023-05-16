@@ -975,23 +975,6 @@ void var73()
                     cout << prob.Name << "  ";
                     cout << prob.middleName << "  ";
                     cout << prob.group << "  " << endl;
-                    int i = 0;
-                    for (int j = 0; j < 10; j++)
-                    {
-                        if (!(prob.examsRecordsData[i][j].name == "0"))
-                        {
-                            cout << "Предмет: ";
-                            cout << prob.examsRecordsData[i][j].name << endl;
-                            for (int i = 0; i < 9; i++)
-                            {
-                                if (!(prob.examsRecordsData[i][j].markType == "0"))
-                                {
-                                    cout << prob.examsRecordsData[i][j].markType << "  ";
-                                }
-                            }
-                            cout << endl;
-                        }
-                    }
                 }
                 break;
             }
@@ -1036,23 +1019,6 @@ void var73()
                     cout << prob.Name << "  ";
                     cout << prob.middleName << "  ";
                     cout << prob.group << "  " << endl;
-                    int i = 0;
-                    for (int j = 0; j < 10; j++)
-                    {
-                        if (!(prob.examsRecordsData[i][j].name == "0"))
-                        {
-                            cout << "Предмет: ";
-                            cout << prob.examsRecordsData[i][j].name << endl;
-                            for (int i = 0; i < 9; i++)
-                            {
-                                if (!(prob.examsRecordsData[i][j].markType == "0"))
-                                {
-                                    cout << prob.examsRecordsData[i][j].markType << "  ";
-                                }
-                            }
-                            cout << endl;
-                        }
-                    }
                 }
                 break;
             }
@@ -1097,23 +1063,6 @@ void var73()
                     cout << prob.Name << "  ";
                     cout << prob.middleName << "  ";
                     cout << prob.group << "  " << endl;
-                    int i = 0;
-                    for (int j = 0; j < 10; j++)
-                    {
-                        if (!(prob.examsRecordsData[i][j].name == "0"))
-                        {
-                            cout << "Предмет: ";
-                            cout << prob.examsRecordsData[i][j].name << endl;
-                            for (int i = 0; i < 9; i++)
-                            {
-                                if (!(prob.examsRecordsData[i][j].markType == "0"))
-                                {
-                                    cout << prob.examsRecordsData[i][j].markType << "  ";
-                                }
-                            }
-                            cout << endl;
-                        }
-                    }
                 }
                 break;
             }
@@ -1371,7 +1320,7 @@ void menuoutput()
         cout << endl;
         cout << "1.Вывести краткие данные о студентах" << endl;
         cout << "2.Вывести полные данные о студенте" << endl;
-        cout << "3.Вывести вариант 73" << endl;
+        cout << "3.Вывести индивидуальное задание" << endl;
         cout << "4.Назад" << falsee << endl;
         falsee = "";
         cin >> a;
